@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+<link rel="stylesheet" href="/Content/base.css">
+<link rel="stylesheet" href="/Content/app.css">
+<!--[if lt IE 9]>
+<script src="/Scripts/html5shiv.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>
+    DD_belatedPNG.fix('header p a,.logo,.contact-nav li a,.main,nav.main li a,.brief-block dt,.tab.visited span,#brief dl');
+    </script>
+    <![endif]-->
+    <!-- <script src="js/jquery-1.8.3.js"></script> -->
+
+    @*@Styles.Render("~/Content")*@
+@*    @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<body>
+    <header>
+        <div class="w980 ma">
+            <div class="nav-border">
+                <a href="http://www.phone580.cn"><div class="logo"></div></a>
+                <nav class="main">
+                    <ul>
+                        <li class="navHome"><a href="/">应用下载</a></li>
+                        <li class="navPay"><a href="/Home/Pay">购买授权</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@RenderSection("scripts", required: false)*@
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<script data-main="/Scripts/fbs/moreAppdl" src="/Scripts/lib/require-jquery.js"></script>
+<script>
+    $(function () {
+        $("li.navHome").addClass("visited").siblings("li").removeClass("visited");
+        $("nav.main li").click(function () {
+            $(this).addClass("visited").siblings("li").removeClass("visited");
+            $("#" + $(this).attr("target")).show().siblings().hide();
+        })
+        $(".intro-block .tab-button button").click(function () {
+            $(this).addClass("visited").siblings("button").removeClass("visited");
+            $(this).parent().siblings("div.img").find("img").eq($(this).index()).show().siblings().hide();
+        })
+    });
+</script>
+<div id="body" class="wrap body">
+    <div class="content-bg">
+        <div class="w995 ma">
+            <section class="clearfix">
+                <div class="search-bar clearfix">
+                    <ul class="mov_plat" id="platForm">
+                        <li modelId="303" name="plat" class="visited"><span class="andr-ic"></span>应用首页</li>
+                    </ul>
+                    <div class="search">
+                        <span class="lf-side"></span>
+                        <input id="appName" type="search" placeholder="搜索应用"/>
+                        <button id="searchForName"></button>
+                    </div>
+                </div>
+                <div class="apps-holder clearfix">
+                    <div class="app-list">
+                            <div class="app-listD">
+                                    <div id="appList" class="hot_applist_h">
+                                    <!--
+                                    <ul class="key-applist" >
+                                         <li class="hover">
+                                            <img src="../../img/fbs/app-sample.png"><p><span class="app-name">UC浏览器</span><span class="app-downloads"><em>427090</em>次</span></p><span class="downloadbutton"></span>
+                                         </li>
+                                         
+                                    </ul>
+                                    -->
+                                    </div>
+                                    <div class="pagelist" id="PagingBar">
+                                          <!--<a>首页</a><a>上一页</a><a>1</a><b>2</b><a>3</a><span>....</span><a>19</a><b>20</b><a>下一页</a><a>尾页</a>-->
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer />
+    </div>
+</div>

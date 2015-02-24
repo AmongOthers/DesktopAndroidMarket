@@ -1,0 +1,86 @@
+﻿<html><head>
+<meta charset="utf-8">
+<meta content="手机助手，手机助手电脑版，手机助手安卓版，手机软件，手机游戏，手机助手下载，苹果应用，安卓软件" name="Keywords">
+<meta name="description" content="蜂助手平台为用户提供绿色、健康、安全的应用和游戏，同时支持Android、iOS两大智能平台">
+<title>蜂助手，您手机的好帮手</title>
+<link rel="shortcut icon" href="fzs.ico">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/app.css">
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>
+    DD_belatedPNG.fix('header p a,.logo,.contact-nav li a,.main,nav.main li a,.brief-block dt,.tab.visited span,#brief dl');
+</script>
+<![endif]-->
+<!-- <script src="js/jquery-1.8.3.js"></script> -->
+<script data-main="js/fbs/moreAppdl" src="js/lib/require-jquery.js"></script>
+<script>
+$(function(){
+	$("nav.main li").click(function(){
+		$(this).addClass("visited").siblings("li").removeClass("visited");
+		$("#"+$(this).attr("target")).show().siblings().hide();
+	})	
+	$(".intro-block .tab-button button").click(function(){
+		$(this).addClass("visited").siblings("button").removeClass("visited");
+		$(this).parent().siblings("div.img").find("img").eq($(this).index()).show().siblings().hide();
+	})
+});
+</script>
+<body>
+	<div id="contact" class="wrap body">
+		<header>
+            <div class="w980 ma">
+                <div class="nav-border">
+                    <a href="http://www.phone580.cn"><div class="logo"></div></a>
+                    <nav class="main">
+                        <ul>
+                            <li class="visited"><a href="app.html?apptype=hot">应用下载</a></li>
+                        	<li><a href="http://www.baidu.cn">公司介绍</a></li>
+                            <li><a href="service.html">服务产品</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+		<div class="content-bg">
+			<div class="w995 ma">
+				<section class="clearfix">
+					<div class="search-bar clearfix">
+						<ul class="mov_plat" id="platForm">
+							<li modelId="303" name="plat"><span class="andr-ic visited"></span>应用首页</li>
+						</ul>
+						<div class="search">
+                            <span class="lf-side"></span>
+							<input id="appName" type="search" placeholder="搜索应用"/>
+							<button id="searchForName"></button>
+						</div>
+					</div>
+					<div class="apps-holder clearfix">
+						<div class="app-list">
+                                <div class="app-listD">
+										<div id="appList" class="hot_applist_h">
+										<!--
+                                        <ul class="key-applist" >
+                                        	 <li class="hover">
+                                             	  <img src="../../img/fbs/app-sample.png"><p><span class="app-name">UC浏览器</span><span class="app-downloads"><em>427090</em>次</span></p><span class="downloadbutton"></span>
+                                             </li>
+                                             
+                                        </ul>
+										-->
+										</div>
+                                        <div class="pagelist" id="PagingBar">
+                                        	  <!--<a>首页</a><a>上一页</a><a>1</a><b>2</b><a>3</a><span>....</span><a>19</a><b>20</b><a>下一页</a><a>尾页</a>-->
+                                        </div>
+                                </div>
+                        </div>
+					</div>
+				</section>
+			</div>
+			<footer />
+		</div>
+	</div>
+</body>
+</html>
