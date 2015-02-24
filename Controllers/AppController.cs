@@ -71,7 +71,7 @@ namespace DesktopAndroidMarket.Controllers
                 registerValue = new RegisterValue
                 {   
                     KeyCode = "",
-                    OccupyTimes = 0,
+                    OccupyTimes = 1,
                     MachineId = registerInfo.MachineId
                 };
                 registerValue.Message = "欢迎使用DesktopAndroid";
@@ -83,30 +83,47 @@ namespace DesktopAndroidMarket.Controllers
                 using (this.registerDbLocker.WriteLock())
                 {
                     var insertSql = String.Format("insert into register(machineid,keycode,occupytimes) values(\"{0}\",\"{1}\",\"{2}\")",
-        registerValue.MachineId, registerValue.KeyCode, 0);
+        registerValue.MachineId, registerValue.KeyCode, registerValue.OccupyTimes);
                     this.registerHelper.ExecuteNonQuery(insertSql);
                 }
             }
             else
             {
-                //非正式版
                 if (String.IsNullOrEmpty(registerValue.KeyCode))
                 {
-                    if (registerValue.OccupyTimes >= LIMIT)
+                    //升级到正式版
+                    if (!String.IsNullOrEmpty(registerInfo.KeyCode))
                     {
-                        registerValue.IsLimited = true;
-                        registerValue.Message = "试用已结束，请升级到正式版";
+                        try2Register(registerInfo, registerValue);
+                        //升级成功
+                        if (!String.IsNullOrEmpty(registerValue.KeyCode))
+                        {
+                            using (this.registerDbLocker.WriteLock())
+                            {
+                                var updateSql = String.Format("update register set keycode = \"{0}\" where machineid = \"{1}\"", registerValue.KeyCode, registerValue.MachineId);
+                                this.registerHelper.ExecuteNonQuery(updateSql);
+                            }
+                        }
                     }
                     else
                     {
-                        registerValue.Message = String.Format("你的试用次数还有{0}次", LIMIT - registerValue.OccupyTimes);
-                        registerValue.OccupyTimes++;
-                        using (this.registerDbLocker.WriteLock())
+                        if (registerValue.OccupyTimes >= LIMIT)
                         {
-                            var updateSql = String.Format("update register set occupytimes = {0} where machineid = \"{1}\"", registerValue.OccupyTimes, registerValue.MachineId);
-                            this.registerHelper.ExecuteNonQuery(updateSql);
+                            registerValue.IsLimited = true;
+                            registerValue.Message = "试用已结束，请升级到正式版";
+                        }
+                        else
+                        {
+                            registerValue.Message = String.Format("你的试用次数还有{0}次", LIMIT - registerValue.OccupyTimes);
+                            registerValue.OccupyTimes++;
+                            using (this.registerDbLocker.WriteLock())
+                            {
+                                var updateSql = String.Format("update register set occupytimes = {0} where machineid = \"{1}\"", registerValue.OccupyTimes, registerValue.MachineId);
+                                this.registerHelper.ExecuteNonQuery(updateSql);
+                            }
                         }
                     }
+                    
                 }
             }
             registerValue.Random = registerInfo.Random;
@@ -124,7 +141,7 @@ namespace DesktopAndroidMarket.Controllers
             var keycodeSql = String.Format("select * from keycode where keycode = \"{0}\"", registerInfo.KeyCode);
             using (this.keycodeDbLocker.ReadLock())
             {
-                using (SQLiteDataReader dr = sqlHelper.ExecuteReader(keycodeSql))
+                using (SQLiteDataReader dr = this.keycodeHelper.ExecuteReader(keycodeSql))
                 {
                     if (dr.Read())
                     {
@@ -141,7 +158,7 @@ namespace DesktopAndroidMarket.Controllers
                 var updateKeyCodeSql = String.Format("update keycode set state = 2 where keycode = \"{0}\"", registerInfo.KeyCode);
                 using (this.keycodeDbLocker.WriteLock())
                 {
-                    this.sqlHelper.ExecuteNonQuery(updateKeyCodeSql);
+                    this.keycodeHelper.ExecuteNonQuery(updateKeyCodeSql);
                 }
             }
             else if (keycodeState == 2)
