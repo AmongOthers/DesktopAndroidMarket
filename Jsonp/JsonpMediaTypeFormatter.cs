@@ -30,7 +30,8 @@ namespace DesktopAndroidMarket.Jsonp
             try
             {
                 this.WriteToStream(type, value, writeStream, content);
-                return Task.FromResult<AsyncVoid>(new AsyncVoid());
+                //return Task.FromResult<AsyncVoid>(new AsyncVoid());
+                return Task.Factory.StartNew(() => { return; });
             }
             catch (Exception exception)
             {
