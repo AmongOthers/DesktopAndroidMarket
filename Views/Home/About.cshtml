@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "关于DeskopAndroid";
+}
+<script src="/Scripts/lib/require-jquery.js"></script>
+<script>
+    $(function () {
+        $("li.navPay").addClass("visited").siblings("li").removeClass("visited");
+        $("nav.main li").click(function () {
+            $(this).addClass("visited").siblings("li").removeClass("visited");
+            $("#" + $(this).attr("target")).show().siblings().hide();
+        })
+        $(".intro-block .tab-button button").click(function () {
+            $(this).addClass("visited").siblings("button").removeClass("visited");
+            $(this).parent().siblings("div.img").find("img").eq($(this).index()).show().siblings().hide();
+        })
+    });
+</script>
+<div id="body">
+    <div>
+        <div class="w995 ma" style="margin-top:20px">
+            <h3>在升级之前，请先试用。</h3>
+            <h3>对应一台PC，每枚授权码的费用是12元，即使你重装了系统也无需再次付费，我们承诺后续升级不会再收取费用。</h3>
+            <h3>购买方式：</h3>
+            <h3>1. 用微信扫描下方二维码，打开微店，建议通过微信支付（可以使用微信红包零钱）。收货人姓名和地址可以随便填写，在结算页面，请输入正确的电话号码，我们将通过短信把授权码发到你的手机上。</h3>
+            <div align="center" style="margin-top:10px">
+                <img src="~/Images/qrcode.jpg" />
+            </div>
+            <h3>2. 打开<a href="http://weibo.com/p/1001603818161865624848">微博文章链接</a>，通过支付宝打赏12元(如果没有出现打赏按钮，需要登录微博后重新打开页面)，我们将通过私信把授权码发给你，请关注@@安卓模拟器DesktopAndroid， 避免你屏蔽了我们的私信，同时有任何问题和建议，欢迎通过该账号联系我们。</h3>
+            <h3>祝你使用愉快！</h3>
+        </div>
+        <footer />
+    </div>
+</div>

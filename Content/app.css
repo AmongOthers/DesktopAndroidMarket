@@ -78,7 +78,7 @@ em{font-style: normal; font-weight: normal;}
 /*全局公用样式*/
 
 /*.content-bg{background: url(../Images/content_shadow1.png) repeat-x;}*/
-.content-bg{background: url(../Images/content_shadow3.png) repeat-x;}
+/*.content-bg{background: url(../Images/content_shadow3.png) repeat-x;}*/
 #members{cursor:pointer;}
 footer{text-align: center; width:100%;}
 
@@ -437,7 +437,7 @@ li a.on .fold,li a.hover .fold{background-position:-89px -8px; }
 .app-key li a{color:#8f8f8f; cursor:pointer; text-decoration: none; }
 .app-key li a.pitch,.app-key li a.hover{color:#1480cc; text-decoration: none; }
 .key-applist{width:100%; float:left; padding:22px 0px 20px 0px; border-bottom:1px dashed #d9d9d9; }
-.key-applist li{float:left; width:98px; height:115px; font-size:14px; text-align:center; margin:0px 3px 0px 6px; display:inline; }
+.key-applist li{float:left; width:98px; height:115px; font-size:10px; text-align:center; margin:0px 3px 0px 6px; display:inline; }
 .key-applist li.hover{background:url(../Images/app-hoverbg.png) no-repeat; }
 .key-applist li img{width:52px; height:52px; margin-top:9px; border:0px; }
 .key-applist li p{width:100%; line-height:20px; }

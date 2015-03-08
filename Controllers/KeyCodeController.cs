@@ -13,68 +13,68 @@ namespace DesktopAndroidMarket.Controllers
 {
     public class KeyCodeController : ApiController
     {
-        SQLiteDBHelper sqlHelper;
-        object sqlHelperLock = new object();
-        ReaderWriterObjectLocker dbLocker = new ReaderWriterObjectLocker();
-
         public Message Get(string password, string mode)
         {
-            if (!password.Equals("fbs123321"))
+            try
             {
-                return new Message
+                if (!password.Equals("fbs123321"))
                 {
-                    Content = "MUA"
-                };
-            }
-            lock (this.dbLocker)
-            {
-                if (this.sqlHelper == null)
-                {
-                    var appRoot = ConfigurationManager.AppSettings["AppRoot"];
-                    this.sqlHelper = new SQLiteDBHelper(String.Format("{0}/keycode/keycode", appRoot));
-                }
-            }
-            if (mode.Equals("init"))
-            {
-                initKeyCodeDb();
-                return new Message
-                {
-                    Content = "VIVA"
-                };
-            }
-            else if(mode.Equals("next"))
-            {
-                string keycode = "";
-                var sql = String.Format("select * from keycode where state = 0 limit 1");
-                using (this.dbLocker.ReadLock())
-                {
-                    using (SQLiteDataReader dr = sqlHelper.ExecuteReader(sql))
+                    return new Message
                     {
-                        if (dr.Read())
+                        Content = "MUA"
+                    };
+                }
+                if (mode.Equals("init"))
+                {
+                    initKeyCodeDb();
+                    return new Message
+                    {
+                        Content = "VIVA"
+                    };
+                }
+                else if (mode.Equals("next"))
+                {
+                    string keycode = "";
+                    var sql = String.Format("select * from keycode where state = 0 limit 1");
+                    using (DatabaseKeeper.GetInstance().KeycodeDbLocker.ReadLock())
+                    {
+                        using (SQLiteDataReader dr = DatabaseKeeper.GetInstance().KeycodeDBHelper.ExecuteReader(sql))
                         {
-                            keycode = dr["keycode"].ToString();
+                            if (dr.Read())
+                            {
+                                keycode = dr["keycode"].ToString();
+                            }
                         }
                     }
-                }
-                sql = String.Format("update keycode set state = 1 where keycode = \"{0}\"", keycode);
-                using (this.dbLocker.WriteLock())
-                {
-                    this.sqlHelper.ExecuteNonQuery(sql);
+                    sql = String.Format("update keycode set state = 1 where keycode = \"{0}\"", keycode);
+                    using (DatabaseKeeper.GetInstance().KeycodeDbLocker.WriteLock())
+                    {
+                        DatabaseKeeper.GetInstance().KeycodeDBHelper.ExecuteNonQuery(sql);
+                    }
+                    return new Message
+                    {
+                        Content = keycode
+                    };
                 }
                 return new Message
                 {
-                    Content = keycode
+                    Content = "OOO"
                 };
             }
-            return new Message
+            catch (Exception ex)
             {
-                Content = "OOO"
-            };
+                Logger.Logger.GetLogger(this).ErrorFormat("GetKeyCode: {0}", ex);
+                return new Message
+                {
+                    Content = "500"
+                };
+            }
+
         }
 
         void initKeyCodeDb()
         {
-            using (var connection = this.sqlHelper.CreateSQLiteConnection())
+            using (var connection = DatabaseKeeper.GetInstance().KeycodeDBHelper.CreateSQLiteConnection())
             {
                 connection.Open();
                 using(var trans = connection.BeginTransaction())

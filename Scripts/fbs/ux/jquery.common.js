@@ -30,7 +30,7 @@ define(['jquery'],function($){
             break;
         }
     }
-	var imgroot="http://" + hostname + "/";
+	var imgroot="http://" + hostname + ":8080/";
 	var stlroot=webroot+'/ssWebsite/website/';
 	var exportroot=webroot+'/ssWebsite';
 	var notReadTotal=0;

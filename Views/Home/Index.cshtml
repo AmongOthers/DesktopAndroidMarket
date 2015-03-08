@@ -1,4 +1,7 @@
-﻿<script data-main="/Scripts/fbs/moreAppdl" src="/Scripts/lib/require-jquery.js"></script>
+﻿@{
+    ViewBag.Title = "下载更多";
+}
+<script data-main="/Scripts/fbs/moreAppdl" src="/Scripts/lib/require-jquery.js"></script>
 <script>
     $(function () {
         $("li.navHome").addClass("visited").siblings("li").removeClass("visited");
@@ -16,6 +19,7 @@
     <div class="content-bg">
         <div class="w995 ma">
             <section class="clearfix">
+                <!--
                 <div class="search-bar clearfix">
                     <ul class="mov_plat" id="platForm">
                         <li modelId="303" name="plat" class="visited"><span class="andr-ic"></span>应用首页</li>
@@ -26,6 +30,8 @@
                         <button id="searchForName"></button>
                     </div>
                 </div>
+-->
+                @*<h2>请下载应用后，拖动安装包文件到软件界面上即可完成安装。</h2>*@
                 <div class="apps-holder clearfix">
                     <div class="app-list">
                             <div class="app-listD">
@@ -39,9 +45,11 @@
                                     </ul>
                                     -->
                                     </div>
+<!--
                                     <div class="pagelist" id="PagingBar">
-                                          <!--<a>首页</a><a>上一页</a><a>1</a><b>2</b><a>3</a><span>....</span><a>19</a><b>20</b><a>下一页</a><a>尾页</a>-->
+                                          <a>首页</a><a>上一页</a><a>1</a><b>2</b><a>3</a><span>....</span><a>19</a><b>20</b><a>下一页</a><a>尾页</a>
                                     </div>
+-->
                             </div>
                     </div>
                 </div>
