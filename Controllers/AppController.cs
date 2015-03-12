@@ -101,12 +101,15 @@ namespace DesktopAndroidMarket.Controllers
                     {
                         if (registerValue.OccupyTimes >= LIMIT)
                         {
-                            registerValue.IsLimited = true;
-                            registerValue.Message = "试用已结束，请升级到正式版";
+                            //不限制试用
+                            //registerValue.IsLimited = true;
+                            //registerValue.Message = "试用已结束，请升级到正式版";
+                            registerValue.Message = "欢迎使用DesktopAndroid";
                         }
                         else
                         {
-                            registerValue.Message = String.Format("你的试用次数还有{0}次", LIMIT - registerValue.OccupyTimes);
+                            registerValue.Message = "欢迎使用DesktopAndroid";
+                            //registerValue.Message = String.Format("你的试用次数还有{0}次", LIMIT - registerValue.OccupyTimes);
                             registerValue.OccupyTimes++;
                             using (DatabaseKeeper.GetInstance().RegisterDbLocker.WriteLock())
                             {

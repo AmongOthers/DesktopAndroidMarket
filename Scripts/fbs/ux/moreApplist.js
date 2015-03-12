@@ -275,7 +275,7 @@ define(['jquery','ux/Paging','ux/jquery.common','ux/applistcommon'],function($,P
 							var  appLi='<li>'+
 												'<img name="proDetail" src="'+common.imgroot+result.list[i].url+'" dlId='+result.list[i].id+'>'+
 												'<p><span class="app-name">'+(result.list[i].name.length>18?result.list[i].name.substring(0,18)+'...':result.list[i].name)+'</span><span class="app-downloads"><em>'+result.list[i].dlTime+'</em>次</span></p>'+
-												'<span class="downloadbutton" dlId=' + result.list[i].id+ ' dlUrl=' + common.imgroot + result.list[i].dlUrl + '></span>'+
+												'<span class="downloadbutton" dlId=' + result.list[i].id+ ' dlUrl=' + common.imgroot + encodeURI(result.list[i].dlUrl) + '></span>'+
 										'</li>';
 							hotAppList.push(appLi);
 							if((i+1)%9==0&&i!==0){

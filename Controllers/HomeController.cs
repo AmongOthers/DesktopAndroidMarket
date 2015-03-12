@@ -13,7 +13,7 @@ namespace DesktopAndroidMarket.Controllers
             return View();
         }
 
-        public ActionResult Pay()
+        public ActionResult Download()
         {
             return View();
         }
